@@ -1,37 +1,70 @@
 // Your code here
 https://flata-hpxq.vercel.app/characters 
 
-fetch('https://flata-hpxq.vercel.app/characters')
-  .then(response => response.json())
-  .then(data => console.log(data));
+// fetch('https://flata-hpxq.vercel.app/characters')
+//   .then(response => response.json())
+//   .then(data => console.log(data));
 
-  GET /characters
-  [
-   {
-     "id": 1,
-     "name": "Mr. Cute",
-     "image": "https://thumbs.gfycat.com/EquatorialIckyCat-max-1mb.gif",
-     "votes": 0
-   },
-   {
-     "id": 2,
-     "name": "Mr. Monkey",
-     "image": "https://thumbs.gfycat.com/FatalInnocentAmericanshorthair-max-1mb.gif",
-     "votes": 0
-   },
-   {
-        "id": 3,
-        "name": "Mr. Grumpy",
-        "image": "https://thumbs.gfycat.com/UnselfishSaneHornedtoad-max-1mb.gif",
-        "votes": 0
-   }
-   {
-        "id": 4,
-        "name": "Mr. Sleepy",
-        "image": "https://thumbs.gfycat.com/UnselfishSaneHornedtoad-max-1mb.gif",
-        "votes
-   }
-   
-  ]
+  // Your code here
+document.addEventListener("DOMContentLoaded", () => {
+    const characterBar = document.getElementById("character-bar");
+    const detailedInfo = document.getElementById("detailed-info");
+    const nameElement = document.getElementById("name");
+    const imageElement = document.getElementById("image");
+    const voteCountElement = document.getElementById("vote-count");
+    const votesForm = document.getElementById("votes-form");
+    const resetButton = document.getElementById("reset-btn");
 
+    let currentCharacter = null;
+
+    fetch("https://flata-hpxq.vercel.app/characters ")
+        .then(response => response.json())
+        .then(characters => {
+            characters.forEach(character => {
+                const span = document.createElement("span");
+                span.textContent = character.name;
+                span.style.cursor = "pointer";
+                span.addEventListener("click", () => displayCharacter(character));
+                characterBar.appendChild(span);
+            });
+        });
+
+    function displayCharacter(character) {
+        currentCharacter = character;
+        nameElement.textContent = character.name;
+        imageElement.src = character.image;
+        imageElement.alt = character.name;
+        voteCountElement.textContent = character.votes;
+    }
+
+    votesForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!currentCharacter) return;
+
+        const votesInput = document.getElementById("votes");
+        const votesToAdd = parseInt(votesInput.value) || 0;
+
+        currentCharacter.votes += votesToAdd;
+        voteCountElement.textContent = currentCharacter.votes;
+        votesInput.value = "";
+
+        fetch(`https://flattercuties-backend-inky.vercel.app/characters/${currentCharacter.id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ votes: currentCharacter.votes })
+        });
+    });
+
+    resetButton.addEventListener("click", () => {
+        if (!currentCharacter) return;
+        currentCharacter.votes = 0;
+        voteCountElement.textContent = 0;
+
+        fetch(`https://flattercuties-backend-inky.vercel.app/characters/${currentCharacter.id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ votes: 0 })
+        });
+    });
+});
    
