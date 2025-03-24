@@ -9,7 +9,13 @@
     </div>
 
     <div id="character-bar">
-      <!-- show characters names here -->
+      <!-- show charactersnames here -->
+       <p id="b">Mr Cute</p>
+       <p id="b">Mx. Monkey</p>
+       <p id="b">Ms.Zebra</p>
+       <p id="b">Dr.Lion</p>
+       <p id="b">Mme.Panda</p>
+       <span></span>
     </div>
 
     <div class="characterInfo">
@@ -27,10 +33,18 @@
         </form>
         <button id="reset-btn">Reset Votes</button>
       </div>
-
-      <!-- Bonus only! Uncomment the elements below when you are ready to work on the bonus deliverables -->
-      <!-- 
-        <h4>Add New Character</h4>
+      <div id="bonus-info">
+        <h4>Character's Votes</h4>
+        <ul id="votes-list">
+          <!-- display votes here -->
+          <li>10</li>
+          <li>20</li>
+          <li>30</li>
+        </ul>
+      </div>
+    </div> 
+    <section id="new-character">
+        <h4 class="New Character">Add New Character</h4> 
         <form id="character-form">
           <div>
             <label for="name">Name</label>
@@ -41,8 +55,17 @@
             <input type="text" id="image-url" name="image-url" />
           </div>
           <input type="submit" value="Add Character" />
+        </form>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" />
+          </div>
+          <div>
+            <label for="image-url">Image URL</label>
+            <input type="text" id="image-url" name="image-url" />
+          </div>
+          <input type="submit" value="Add Character" />
+</section>         
         </form> 
-      -->
     </div>
     <script src="src/index.js"></script>
   </body>
