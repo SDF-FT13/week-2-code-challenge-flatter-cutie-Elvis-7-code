@@ -35,8 +35,9 @@ html, body {
   border-radius: 2em;
   border: 1px solid white;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s ease-in-out;;
   size: 3vh;
+
 }
 
 .characterInfo{
@@ -45,6 +46,7 @@ html, body {
   font-size: 24px;
   border: dotted;
   text-align: center;
+  border: 1px solid white;
 }
 
 input[type="submit"], button {
